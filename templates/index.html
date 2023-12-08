@@ -15,6 +15,7 @@
             position: relative;
             margin: 0;
             font-family: 'Neometric Alt Extra Bold', sans-serif;
+            overflow: hidden; /* Overlay'dan taşan içerikleri gizlemek için */
         }
 
         .overlay {
@@ -23,25 +24,27 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3); /* Bu kısmı isteğinize göre ayarlayabilirsiniz. */
-            z-index: -1; /* Overlay'i arka plana yerleştirin */
-        }
-
-        .background-image {
             background: url('/static/images/finance_background.jpg') no-repeat center center fixed;
             background-size: cover;
-            height: 100vh;
-            color: #fff;
+            filter: brightness(0.6); /* İsteğinize göre parlaklığı ayarlayın */
+            z-index: -1;
+        }
+
+        .content {
+            z-index: 1; /* Overlay'ın üzerine yerleştirin */
+            position: relative;
+            color: #fff; /* Text color on top of the background image */
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            filter: brightness(75%); /* İsteğinize göre parlaklığı ayarlayın */
+            height: 100vh;
+            padding: 20px;
         }
 
         /* Transparent Navbar styling */
         .navbar {
-            background-color: transparent !important; /* Default still transparent */
+            background-color: transparent !important;
             transition: background-color 0.5s ease;
         }
 
@@ -72,12 +75,12 @@
         </a>
     </nav>
 
-    <!-- Background Image with Overlay -->
-    <div class="background-image">
-        <div class="overlay"></div>
-        <div class="container mt-5">
-            <h1 class="display-3">Çok Yakında Hizmetinizdeyiz</h1>
-        </div>
+    <!-- Overlay Background Image -->
+    <div class="overlay"></div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <h1 class="display-3">Çok Yakında Hizmetinizdeyiz</h1>
     </div>
 
     <!-- Bootstrap JS and Popper.js -->
@@ -98,3 +101,4 @@
     </script>
 </body>
 </html>
+
