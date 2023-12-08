@@ -12,10 +12,8 @@
     <!-- Custom CSS for background image and text font -->
     <style>
         body {
-            position: relative;
             margin: 0;
             font-family: 'Neometric Alt Extra Bold', sans-serif;
-            overflow: hidden; /* Overlay'dan taşan içerikleri gizlemek için */
         }
 
         .overlay {
@@ -28,11 +26,14 @@
             background-size: cover;
             filter: brightness(0.7); /* İsteğinize göre parlaklığı ayarlayın */
             z-index: -1;
+            transition: filter 0.5s ease; /* Parlaklık geçiş efekti */
         }
 
         .content {
-            z-index: 1; /* Overlay'ın üzerine yerleştirin */
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
             color: #fff; /* Text color on top of the background image */
             text-align: center;
             display: flex;
@@ -40,6 +41,9 @@
             justify-content: center;
             height: 100vh;
             padding: 20px;
+            z-index: 1; /* Overlay'ın üzerine yerleştirin */
+            background-color: rgba(0, 0, 0, 0.7); /* Başlangıçta saydam arka plan */
+            transition: background-color 0.5s ease; /* Arka plan geçiş efekti */
         }
 
         /* Transparent Navbar styling */
@@ -64,6 +68,15 @@
         .navbar.scrolled {
             background-color: rgba(0, 0, 0, 0.7) !important;
         }
+
+        /* Beyaz Alan */
+        .white-section {
+            background-color: white;
+            padding: 50px 20px; /* İstenilen boşlukları ayarlayabilirsiniz */
+            text-align: center;
+            color: #000; /* Beyaz alanın metin rengini ayarlayın */
+            display: none; /* Başlangıçta görünmez */
+        }
     </style>
 </head>
 <body>
@@ -78,7 +91,7 @@
     <!-- Overlay Background Image -->
     <div class="overlay"></div>
 
-    <!-- Content Area -->
+    <!-- Üst Kısım - Verilen Bilgiler -->
     <div class="content">
         <h1 class="display-3">Çok Yakında Hizmetinizdeyiz</h1>
 
@@ -101,21 +114,38 @@
         </div>
     </div>
 
+    <!-- Beyaz Alan -->
+    <div class="white-section">
+        <h2>Bu alana dilediğiniz yazıları ekleyebilirsiniz</h2>
+        <p>Örneğin: Projemizin öne çıkan özellikleri, güncellemeler veya diğer önemli bilgiler</p>
+    </div>
+
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script>
-        // Change navbar background color on scroll
-        window.onscroll = function() {
-            var navbar = document.querySelector('.navbar');
-            if (window.scrollY > 10) {
-                navbar.classList.add('scrolled');
+        var content = document.querySelector('.content');
+        var whiteSection = document.querySelector('.white-section');
+        var overlay = document.querySelector('.overlay');
+
+        // Mouse hareketi algılandığında
+        document.addEventListener('mousemove', function(event) {
+            // Ekran yüksekliğinin yüzde kaçında beyaz alanın başlaması gerektiğini belirleyin
+            var whiteSectionStart = window.innerHeight * 0.7;
+
+            // Mouse aşağı doğru hareket ediyorsa
+            if (event.clientY > whiteSectionStart) {
+                content.style.backgroundColor = 'rgba(0, 0, 0, 0)'; // Saydam arka plan
+                overlay.style.filter = 'brightness(0.3)'; // Saydamlık efekti
+                whiteSection.style.display = 'block'; // Beyaz alanı göster
             } else {
-                navbar.classList.remove('scrolled');
+                content.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'; // Orijinal arka plan rengi
+                overlay.style.filter = 'brightness(0.7)'; // Orijinal parlaklık
+                whiteSection.style.display = 'none'; // Beyaz alanı gizle
             }
-        };
+        });
     </script>
 </body>
 </html>
