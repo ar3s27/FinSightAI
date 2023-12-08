@@ -1,6 +1,6 @@
 <!--FinSightAI-->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,132 +9,26 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neometric+Alt+Extra+Bold&display=swap">
-    <!-- Custom CSS for background image and text font -->
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Neometric Alt Extra Bold', sans-serif;
-            overflow: hidden; /* Overlay'dan taşan içerikleri gizlemek için */
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('/static/images/finance_background.jpg') no-repeat center center fixed;
-            background-size: cover;
-            filter: brightness(0.6); /* İsteğinize göre parlaklığı ayarlayın */
-            z-index: -1;
-            transition: filter 0.5s ease; /* Parlaklık geçiş efekti */
-        }
-
-        .content {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            color: #fff; /* Text color on top of the background image */
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100vh;
-            padding: 20px;
-            z-index: 1; /* Overlay'ın üzerine yerleştirin */
-            background-color: rgba(0, 0, 0, 0.7); /* Başlangıçta saydam arka plan */
-            transition: background-color 0.5s ease; /* Arka plan geçiş efekti */
-        }
-
-        /* Transparent Navbar styling */
-        .navbar {
-            background-color: transparent !important;
-            transition: background-color 0.5s ease;
-        }
-
-        .navbar-dark .navbar-nav .nav-link {
-            color: white;
-        }
-
-        .navbar-dark .navbar-toggler-icon {
-            background-color: white;
-        }
-
-        .navbar-dark .navbar-toggler {
-            border-color: white;
-        }
-
-        /* Change navbar background color on scroll */
-        .navbar.scrolled {
-            background-color: rgba(0, 0, 0, 0.7) !important;
-        }
-
-        /* Beyaz Alan */
-        .white-section {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: white;
-            padding: 50px 20px; /* İstenilen boşlukları ayarlayabilirsiniz */
-            text-align: center;
-            color: #000; /* Beyaz alanın metin rengini ayarlayın */
-            transform: translateY(100%); /* Başlangıçta aşağıda gizli */
-            transition: transform 0.5s ease; /* Transform geçiş efekti */
-            font-family: 'Neometric Alt Extra Bold', sans-serif;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-
     <!-- Navbar -->
     <nav class="navbar navbar-dark bg-transparent fixed-top">
         <a class="navbar-brand" href="#">
             FinSightAI
         </a>
     </nav>
-
     <!-- Overlay Background Image -->
     <div class="overlay"></div>
-
     <!-- Üst Kısım - Verilen Bilgiler -->
     <div class="content">
-        <h1 class="display-3">Çok Yakında Hizmetinizdeyiz...</h1>
-
-        <!-- Geliştiriciler ve Açıklamalar Sütunları -->
-
+        <h1 class="display-3">Çok Yakında Hizmetinizdeyiz</h1>
     </div>
-
     <!-- Beyaz Alan -->
     <div class="white-section">
         <h2>Projemizin Tanımı</h2>
         <p>Borsa hisse fiyatlarının zaman serileri metodlarıyla analizini gerçekleştiren ve finans haberlerini kullanarak hisselerin gelecekteki fiyatlarını tahmin eden bir yapay zeka tabanlı uygulama arayüzü servisi geliştiriyoruz. Bu projenin temel amacı, yatırımcılara stratejik kararlar vermelerine yardımcı olmak, gelecekteki piyasa hareketlerini öngörmek ve kullanıcılara tavsiyelerde bulunmaktır.</p>
     </div>
-
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-    <script>
-        var content = document.querySelector('.content');
-        var whiteSection = document.querySelector('.white-section');
-        var overlay = document.querySelector('.overlay');
-
-        // Mouse tekerleği hareketi algılandığında
-        document.addEventListener('wheel', function(event) {
-            // Tekerleği aşağı kaydırıyorsa
-            if (event.deltaY > 0) {
-                content.style.backgroundColor = 'rgba(0, 0, 0, 0)'; // Saydam arka plan
-                overlay.style.filter = 'brightness(0.3)'; // Saydamlık efekti
-                whiteSection.style.transform = 'translateY(0%)'; // Beyaz alanı aşağı kaydır
-            } else {
-                content.style.backgroundColor = 'rgba(0, 0, 0, 0.6)'; // Orijinal arka plan rengi
-                overlay.style.filter = 'brightness(0.7)'; // Orijinal parlaklık
-                whiteSection.style.transform = 'translateY(100%)'; // Beyaz alanı yukarı kaydır
-            }
-        });
-    </script>
 </body>
 </html>
